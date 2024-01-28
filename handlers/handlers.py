@@ -8,32 +8,6 @@ last_accessed = {}
 user_bonuses = {}
 
 
-@dp.callback_query(F.data == "openWebApps")
-async def openWebApps(callback: CallbackQuery):
-    user_id = callback.message.from_user.id
-    current_time = datetime.now()
-
-    # Проверяем, использовал ли пользователь функцию сегодня
-    if user_id in last_accessed and (current_time - last_accessed[user_id]).days < 1:
-        keyboard = InlineKeyboardMarkup(
-            inline_keyboard=[
-                [InlineKeyboardButton(text="Карты ангелов",
-                                      web_app=types.WebAppInfo(url=WEBAPP_URL, mode='fullscreen', fullscreen=True))]
-            ]
-        )
-        await callback.message.answer("HЧтобы открыть карты ангелов, нажми кнопку ниже", reply_markup=keyboard)
-    else:
-        # Убедитесь, что WEBAPP_URL определен
-        keyboard = InlineKeyboardMarkup(
-            inline_keyboard=[
-                [InlineKeyboardButton(text="Карты ангелов", web_app=types.WebAppInfo(url=WEBAPP_URL, mode='fullscreen', fullscreen=True))]
-            ]
-        )
-        await callback.message.answer("Чтобы открыть карты ангелов, нажми кнопку ниже", reply_markup=keyboard)
-        user_bonuses[user_id] = user_bonuses.get(user_id, 0) + 3
-        last_accessed[user_id] = current_time
-
-
 @dp.message(F.text.lower() == "старт")
 async def openWebApps(message: types.Message):
     user_id = message.from_user.id
