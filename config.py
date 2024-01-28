@@ -1,2 +1,2 @@
-TOKEN = "6455153491:AAFbzZ3NvSey4lNnuGUtetROF2HViowspBA"
+TOKEN = "6816970904:AAGbPyCa4I67RvBv7m2MPN0jpkxXz1wbHiI"
 WEBAPP_URL = "https://evoschool.ru/karty/"
